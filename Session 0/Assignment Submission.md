@@ -157,8 +157,8 @@ We need to repeat forward propagation and backpropagation to update the paramete
   <img src="images/eq4.png"  />                   
 Now, we can train our model and make predictions!                
 
-#### Submitted By: 
-GROUP 23
+#### Submitted By:                        
+GROUP 23                  
 •	Jayasankar Raju S - muralis2raj@gmail.com               
 •	Sarthak Dargan – sarthak221995@gmail.com               
 •	CV Chiranthan - chiranthancv95@gmail.com               
