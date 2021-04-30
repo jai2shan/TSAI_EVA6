@@ -1,11 +1,11 @@
 ## What are Channels and Kernels (according to EVA)?
-https://ai.stackexchange.com/questions/9751/what-is-the-concept-of-channels-in-cnns
-https://www.quora.com/What-do-channels-refer-to-in-a-convolutional-neural-network
 
 Components with which an image is formed are called as channels. Every kernel in CNN will move in XY direction only. Every pixel has three(in case of RGB) values for an image. Every value will have different kind of information stored about the same object in the images which can help us differentiating or extracting textures gradients from the images. In short by sliding across different pixel values across three channels CNN is trying to learn features in XY direction from all the channels together.
 
 Kernels are feature extractors. They do this by sliding across the image in the specified matrix form (3x3|5x5....) to extract convolved feature. kernel is nothing but a filter that is used to extract the features from the images. It moves over the input data, performs the dot product with the sub-region of input data, and gets the output as the matrix of dot products.  In short, the kernel is used to extract high-level features like edges from the image.
 
+https://ai.stackexchange.com/questions/9751/what-is-the-concept-of-channels-in-cnns            
+https://www.quora.com/What-do-channels-refer-to-in-a-convolutional-neural-network             
 
 ## Why should we (nearly) always use 3x3 kernels?
 5x5 creates 25 parameters whereas the replacement 3x3 does the same in two layers with 9 features in each layer. However, this is not always true that 3x3 is effective there are cases when 5x5 needed 3 layers of 3x3 kernels to match the performance of the former.
