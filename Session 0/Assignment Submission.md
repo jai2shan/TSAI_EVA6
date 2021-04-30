@@ -2,13 +2,12 @@
 
 <img src="images/Picture1.png"  />
 Before we try to decode Channels and Kernels in a digital image, lets first understand what is a digital image. A digital image is an array of numerical numbers known as pixels. Pixels are the smallest individual element in an image, holding antiquated values that represent the brightness of a given color at any specific point. 
-Images are generally organized in two dimensions with the array starting at the top-left where the index is 0 and flows from left-to-right and top-to-bottom. In a color image, each pixel represents a color made up of three distinct numerical values. These distinct numerical values may represent the intensity of Red, Green and Blue light. The combination of these three intensity values gives each pixel its color. In any individual pixel, an intensity of 0 indicates no light in that channel for that pixel and an intensity of 255 indicates the maximum light in the channel for that pixel. 
+Images are generally organized in two dimensions with the array starting at the top-left where the index is 0 and flows from left-to-right and top-to-bottom. In a color image, each pixel represents a color made up of three distinct numerical values. These distinct numerical values may represent the intensity of Red, Green and Blue light. The combination of these three intensity values gives each pixel its color. In any individual pixel, an intensity of 0 indicates no light in that channel for that pixel and an intensity of 255 indicates the maximum light in the channel for that pixel.      
+<img src="images/Picture2.png"  />       
+Now, the kernel is nothing but a filter that is used to extract the features from the images. The kernel is a matrix that moves over the input data, performs the dot product with the sub-region of input data, and gets the output as the matrix of dot products.            
 
-<img src="images/Picture2.png"  />   
-Now, the kernel is nothing but a filter that is used to extract the features from the images. The kernel is a matrix that moves over the input data, performs the dot product with the sub-region of input data, and gets the output as the matrix of dot products.
-
-For Example, the given kernel, convolve over the 2D, single Channel Greyscale Image and sharpen the given image.
-<img src="images/Picture3.png"  />
+For Example, the given kernel, convolve over the 2D, single Channel Greyscale Image and sharpen the given image.               
+<img src="images/Picture3.png"  />            
 
 
  
@@ -144,25 +143,25 @@ https://ai.stackexchange.com/questions/5092/how-are-kernels-input-values-initial
 
 #### Q5 What happens during the training of a DNN?
 As the EVA 6 Course is focused towards Computer Vision. I will be answering the question taking Image data as context. Let us try to understand a simple example of Binary Classification problem; predict if a picture has a cat or not. 
-First, we select the Activation Function; as the problem statement is Binary Classification, lets take Sigmoid Activation Function. Mathematically Sigmoid Function is expressed as 
+First, we select the Activation Function; as the problem statement is Binary Classification, lets take Sigmoid Activation Function. Mathematically Sigmoid Function is expressed as               
  <img src="images/eq1.png"  />   
-Here z is defined as weighted input and is defined as:
-  <img src="images/eq2.png"  />  
-Where w is the weight matrix or importance of a feature and b is a bias(constant). Now, we need to initialize the weights and bias. 
-Now, we need to define a function for forward propagation and for backpropagation. During forward propagation, a series of calculations is performed to generate a prediction and to calculate the cost. The cost is a function that we wish to minimize
-  <img src="images/eq3.png"  />  
+Here z is defined as weighted input and is defined as:                 
+  <img src="images/eq2.png"  />                     
+Where w is the weight matrix or importance of a feature and b is a bias(constant). Now, we need to initialize the weights and bias.                   
+Now, we need to define a function for forward propagation and for backpropagation. During forward propagation, a series of calculations is performed to generate a prediction and to calculate the cost. The cost is a function that we wish to minimize            
+  <img src="images/eq3.png"  />                       
 
-Where y is an observation and y_hat is a prediction.
-Then, backpropagation calculates the gradient, or the derivatives. This will be useful during the optimization phase, because when the derivatives are close or equal to 0, it means that our parameters are optimized to minimize the cost function.
-We need to repeat forward propagation and backpropagation to update the parameters in order to minimize the cost function. This is done using gradient descent. For that, we set a learning rate which is a small positive value that controls the magnitude of change of the parameters at each run.
-  <img src="images/eq4.png"  />  
-Now, we can train our model and make predictions!
+Where y is an observation and y_hat is a prediction.                    
+Then, backpropagation calculates the gradient, or the derivatives. This will be useful during the optimization phase, because when the derivatives are close or equal to 0, it means that our parameters are optimized to minimize the cost function.                                                 
+We need to repeat forward propagation and backpropagation to update the parameters in order to minimize the cost function. This is done using gradient descent. For that, we set a learning rate which is a small positive value that controls the magnitude of change of the parameters at each run.                          
+  <img src="images/eq4.png"  />                   
+Now, we can train our model and make predictions!                
 
 #### Submitted By: 
 GROUP 23
-•	Jayasankar Raju S - muralis2raj@gmail.com
-•	Sarthak Dargan – sarthak221995@gmail.com
-•	CV Chiranthan - chiranthancv95@gmail.com
-•	Mayank Singhal - singhal.mayank77@gmail.com
+•	Jayasankar Raju S - muralis2raj@gmail.com               
+•	Sarthak Dargan – sarthak221995@gmail.com               
+•	CV Chiranthan - chiranthancv95@gmail.com               
+•	Mayank Singhal - singhal.mayank77@gmail.com               
 
 
