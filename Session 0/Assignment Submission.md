@@ -3,11 +3,11 @@
 <img src="images/Picture1.png"  />
 Before we try to decode Channels and Kernels in a digital image, lets first understand what is a digital image. A digital image is an array of numerical numbers known as pixels. Pixels are the smallest individual element in an image, holding antiquated values that represent the brightness of a given color at any specific point. 
 Images are generally organized in two dimensions with the array starting at the top-left where the index is 0 and flows from left-to-right and top-to-bottom. In a color image, each pixel represents a color made up of three distinct numerical values. These distinct numerical values may represent the intensity of Red, Green and Blue light. The combination of these three intensity values gives each pixel its color. In any individual pixel, an intensity of 0 indicates no light in that channel for that pixel and an intensity of 255 indicates the maximum light in the channel for that pixel.      
-<img src="images/Picture2.png"  />       
+<img src="images/Picture2.PNG"  />       
 Now, the kernel is nothing but a filter that is used to extract the features from the images. The kernel is a matrix that moves over the input data, performs the dot product with the sub-region of input data, and gets the output as the matrix of dot products.            
 
 For Example, the given kernel, convolve over the 2D, single Channel Greyscale Image and sharpen the given image.               
-<img src="images/Picture3.png"  />            
+<img src="images/Picture3.PNG"  />            
 
 
  
