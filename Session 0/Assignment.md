@@ -136,12 +136,12 @@ https://ai.stackexchange.com/questions/5092/how-are-kernels-input-values-initial
 ## What happens during the training of a DNN?
 
 <img src="images/1_vkQ0hXDaQv57sALXAJquxA.jpeg"  />
-Mainly Two things happen in CNN
-###### 1)Feature Learning: 
-Series of convolutional layers that convolve with a multiplication or other dot product
-###### 2)Classification: 
-Activation function is commonly a RELU layer, and is subsequently followed by additional convolutions such as pooling layers, fully connected layers and normalization layers, referred to as hidden layers because their inputs and outputs are masked by the activation function and final convolution.
-The final convolution, in turn, often involves backpropagation in order to more accurately weight the end product.
+Mainly Two things happen in CNN          
+###### 1)Feature Learning:            
+Series of convolutional layers that convolve with a multiplication or other dot product            
+###### 2)Classification:                       
+Activation function is commonly a RELU layer, and is subsequently followed by additional convolutions such as pooling layers, fully connected layers and normalization layers, referred to as hidden layers because their inputs and outputs are masked by the activation function and final convolution.                               
+The final convolution, in turn, often involves backpropagation in order to more accurately weight the end product.                  
 
 
 
