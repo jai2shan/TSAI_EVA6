@@ -10,6 +10,19 @@ Kernels are feature extractors. They do this by sliding across the image in the 
 ## Why should we (nearly) always use 3x3 kernels?
 ## How many times to we need to perform 3x3 convolutions operations to reach close to 1x1 from 199x199 (type each layer output like 199x199 > 197x197...)
 ## How are kernels initialized? 
+Before the advances in optimization techniques and activation of non linearities, kernel is initializes from a random distribution. With advances, all the advances we are able to train convolutional neural networks from a randomized initialization.
+
+Weights of the backpropagation will be randomly initialized such that the mean of the distribution weights is 0 and standard deviation of 1.
+
+###### Potential Problems with Weight Initializations
+1) If the weights are too small, then the signal shrinks as it passes through each layer. Ends up with very small value to use.      
+2) If the weights are too large, then the signal grows too large as it passes through each layer, which will bevery large by the time it ends    
+
+Xavier Initialization takes care of this problem. For more understanding on Xavier initialization below blog and vlog can be used.      
+https://andyljones.tumblr.com/post/110998971763/an-explanation-of-xavier-initialization     
+https://www.youtube.com/watch?v=8krd5qKVw-Q    
+Paper on Xavier Initialization : http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf
+
 https://stats.stackexchange.com/questions/200513/how-to-initialize-the-elements-of-the-filter-matrix
 https://stats.stackexchange.com/questions/267807/cnn-kernels-updates-initialization
 https://www.quora.com/How-are-convolutional-filters-kernels-initialized-and-learned-in-a-convolutional-neural-network-CNN
@@ -18,6 +31,7 @@ https://ai.stackexchange.com/questions/5092/how-are-kernels-input-values-initial
 ## What happens during the training of a DNN?
 
 Mainly Two things happen in CNN
+<img src="images/1_vkQ0hXDaQv57sALXAJquxA.jpeg"  />
 ###### 1)Feature Learning: 
 	Series of convolutional layers that convolve with a multiplication or other dot product
 ###### 2)Classification: 
