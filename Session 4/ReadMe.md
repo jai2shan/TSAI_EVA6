@@ -18,7 +18,7 @@ Maximum Train Accuracy - 98.87%
 ## Part 2 - CNN - MNIST
 [Link to Colab:](https://colab.research.google.com/github/jai2shan/TSAI-EVA40-Assignments/blob/master/Session%209/Assignment_9_Step%203_updated%2010%20mins%20after%20asgnt%20submission.ipynb) 
 
-## Data Augmentations:
+### Data Augmentations:
 RandomRotation and RandomAffine 
 
 Concatenated the train data twice one set with data augmentations and other without augmentations    
