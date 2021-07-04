@@ -1,4 +1,5 @@
 import torch
+from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torchsummary import summary
 import torch.optim as optim
 import torch.nn as nn
@@ -29,7 +30,7 @@ class TrainTest:
         self.lr = lr
         self.opt = opt
         self.optimizer = optim.SGD(self.model.parameters(), lr=self.lr, momentum=0.9)
-
+        self.L1 = L1
         if self.opt == "ReduceLROnPlateau":
             self.scheduler = ReduceLROnPlateau(self.optimizer, 'min')
 
