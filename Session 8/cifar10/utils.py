@@ -113,7 +113,7 @@ class TrainTest:
 
 
 class UnNormalize(object):
-    def __init__(self):
+    def __init__(self, data):
         self.mean = data.mean
         self.std = data.std
 
