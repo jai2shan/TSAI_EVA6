@@ -16,7 +16,7 @@ class TrainTest:
     def __init__(self,):
         pass
 
-    def __init__(self, model, train_loader, test_loader, L1 = False):
+    def __init__(self, model, train_loader, test_loader, opt = "SGD",L1 = False, lr = 0.001):
         self.train_losses = []
         self.test_losses = []
         self.train_acc = []
@@ -26,8 +26,11 @@ class TrainTest:
         self.train_loader = train_loader
         self.test_loader = test_loader
         self.criterion = nn.CrossEntropyLoss()
-        self.optimizer = optim.SGD(self.model.parameters(), lr=0.001, momentum=0.9)
-        self.L1 = L1
+        self.lr = lr
+        self.opt = opt
+        self.optimizer = optim.SGD(self.model.parameters(), lr=self.lr, momentum=0.9)
+        if self.opt == "ReduceLROnPlateau":
+            self.scheduler = ReduceLROnPlateau(self.optimizer, 'min')
 
     def train_(self):
         self.model.train()
@@ -86,6 +89,9 @@ class TrainTest:
                 correct += pred.eq(target.view_as(pred)).sum().item()
 
         test_loss /= len(self.test_loader.dataset)
+        if self.opt ==  "ReduceLROnPlateau":
+            self.scheduler.step(test_loss / len(self.test_loader))
+
         self.test_losses.append(test_loss)
 
         print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)\n'.format(
