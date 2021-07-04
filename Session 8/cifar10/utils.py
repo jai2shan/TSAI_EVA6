@@ -16,7 +16,7 @@ class TrainTest:
     def __init__(self,):
         pass
 
-    def __init__(self, model, train_loader, test_loader):
+    def __init__(self, model, train_loader, test_loader, L1 = False):
         self.train_losses = []
         self.test_losses = []
         self.train_acc = []
@@ -27,10 +27,9 @@ class TrainTest:
         self.test_loader = test_loader
         self.criterion = nn.CrossEntropyLoss()
         self.optimizer = optim.SGD(self.model.parameters(), lr=0.001, momentum=0.9)
+        self.L1 = L1
 
-
-
-    def train_(self, epoch, L1=False):
+    def train_(self):
         self.model.train()
         pbar = tqdm(self.train_loader)
         correct = 0
@@ -49,7 +48,7 @@ class TrainTest:
 
             outputs = self.model(data)
             loss = self.criterion(outputs, target)
-            if L1 == True:
+            if self.L1 == True:
                 l1_crit = nn.L1Loss(size_average=False)
                 reg_loss = 0
                 for param in self.model.parameters():
@@ -73,7 +72,6 @@ class TrainTest:
             pbar.set_description(
                 desc=f'Loss={loss.item()} Batch_id={batch_idx} Accuracy={100 * correct / processed:0.2f}')
             self.train_acc.append(100 * correct / processed)
-            self.test_()
 
     def test_(self):
         self.model.eval()
@@ -97,3 +95,11 @@ class TrainTest:
         self.test_acc.append(100. * correct / len(self.test_loader.dataset))
         accT = 100. * correct / len(self.test_loader.dataset)
         return accT
+
+    def __call__(self, epochs):
+        for epoch in range(epochs):
+            print("EPOCH:", epoch)
+            self.train_()
+            self.test_()
+
+        print('Finished Training')
