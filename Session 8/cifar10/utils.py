@@ -170,7 +170,7 @@ def Misclassified_Images(model, data, test_loader,device = "cuda"):
 def plot_Misclassified(im_pred,data):
   plt.figure(figsize=(16,16))
 
-  for i in range(len(im_pred['Correct'])):
+  for i in range(len(im_pred['Correct'][:5])):
     plt.subplot(1,5,i+1)
     label_ = data.classes[im_pred['Correct'][i]['actual'].cpu()]
     pred_ = data.classes[im_pred['Correct'][i]['pred'].cpu()[0]]
@@ -178,12 +178,11 @@ def plot_Misclassified(im_pred,data):
     plt.title('Actual Value is {label}\n Predicted Value is {pred}'.format(label=label_, pred =pred_),  color='b')
     plt.imshow(im_pred['Correct'][i]['UnNorm_Image'].cpu().permute(1, 2, 0))
 
-
   plt.show()
 
   plt.figure(figsize=(16,16))
 
-  for i in range(len(im_pred['Wrong'])):
+  for i in range(len(im_pred['Wrong'][:5])):
     plt.subplot(1,5,i+1)
     label_ = data.classes[im_pred['Wrong'][i]['actual'].cpu()]
     pred_ = data.classes[im_pred['Wrong'][i]['pred'].cpu()[0]]
