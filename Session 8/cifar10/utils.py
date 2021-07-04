@@ -154,10 +154,10 @@ def Misclassified_Images(model, data, test_loader,device = "cuda"):
           for id in range(len(data)):
             if plt_dt['target'][id] == plt_dt['pred'][id]:
               if (len(im_pred['Correct'])<5):
-                  im_pred['Correct'] = im_pred['Correct'] + [{'Image': data[id].copy(), 'pred': pred[id], 'actual': target[id], 'UnNorm_Image': revnorm(data[id])}]
+                  im_pred['Correct'] = im_pred['Correct'] + [{'Image': data[id], 'pred': pred[id], 'actual': target[id], 'UnNorm_Image': revnorm(data[id])}]
               else:
                   if (len(im_pred['Wrong']) < 5):
-                      im_pred['Wrong'] = im_pred['Wrong'] + [{'Image': data[id].copy(), 'pred': pred[id], 'actual': target[id], 'UnNorm_Image': revnorm(data[id])}]
+                      im_pred['Wrong'] = im_pred['Wrong'] + [{'Image': data[id], 'pred': pred[id], 'actual': target[id], 'UnNorm_Image': revnorm(data[id])}]
 
   return im_pred
 
