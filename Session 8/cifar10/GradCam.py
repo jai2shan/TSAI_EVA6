@@ -116,3 +116,45 @@ def visualize_cam(mask, img, alpha=1.0):
     return heatmap, result
 
 
+def GradCamDisplay(model, images, classes, device, type_):
+    # normed_torch_img = []
+    # torch_img_list = []
+    #
+    # # for i in pil_image:
+    #     torch_img = transforms.Compose([
+    #         transforms.Resize((32, 32)),
+    #         transforms.ToTensor()])(i).to(device)
+    #     torch_img_list.append(torch_img)
+    #     normed_torch_img.append(transforms.Normalize([0.4914, 0.4822, 0.4465], [0.247, 0.243, 0.261])(torch_img)[None])
+
+    def imshow(img, actual, pred_, type_):
+        # img = img / 2 + 0.5     # unnormalize
+        npimg = img.numpy()
+        fig = plt.figure(figsize=(10, 10))
+        plt.imshow(np.transpose(npimg, (1, 2, 0)), interpolation='none')
+        if type_:
+            plt.title('Actual Value is {label}\n Predicted Value is {pred}'.format(label=actual, pred=pred_), color='b')
+        else:
+            plt.title('Actual Value is {label}\n Predicted Value is {pred}'.format(label=actual, pred=pred_), color='r')
+
+    for item in images:
+        images1 = [item['UnNorm_Image'].cpu()]
+        images2 = [item['UnNorm_Image'].cpu()]
+
+        b = model
+
+        output = model(item['Image'].unsqueeze(0))
+
+        # _, predicted = torch.max(output.data, 1)
+        # print(classes[int(predicted)])
+        layers = [b.layer1, b.layer2, b.layer3, b.layer4]
+
+        for j in layers:
+            g = GradCAM(b, j)
+            mask, _ = g(item['Image'].unsqueeze(0))
+            heatmap, result = visualize_cam(mask, item['UnNorm_Image'])
+            images1.extend([heatmap])
+            images2.extend([result])
+
+        grid_image = make_grid(images1 + images2, nrow=5)
+        imshow(grid_image, classes[item['actual']], classes[item['pred']], type_)
