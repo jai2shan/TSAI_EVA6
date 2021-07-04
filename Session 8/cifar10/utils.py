@@ -7,7 +7,7 @@ import torch.nn.functional as F
 
 def cuda_device():
     use_cuda = torch.cuda.is_available()
-    device = torch.device("cuda" if use_cuda else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     print('Cuda Device : {}'.format(device))
     return device
 
