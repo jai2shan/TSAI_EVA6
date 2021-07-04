@@ -29,6 +29,7 @@ class TrainTest:
         self.lr = lr
         self.opt = opt
         self.optimizer = optim.SGD(self.model.parameters(), lr=self.lr, momentum=0.9)
+        self.L1 = L1
         if self.opt == "ReduceLROnPlateau":
             self.scheduler = ReduceLROnPlateau(self.optimizer, 'min')
 
