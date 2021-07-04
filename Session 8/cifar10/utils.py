@@ -154,10 +154,10 @@ def Misclassified_Images(model, data, test_loader,device = "cuda"):
           for id in range(len(data)):
             if plt_dt['target'][id] == plt_dt['pred'][id]:
               if (len(im_pred['Correct'])<5):
-                im_pred['Correct'] = im_pred['Correct']+ [{'Image':data[id],'pred':pred[id],'actual' : target[id]}]
-            else:
-              if (len(im_pred['Wrong'])<5):
-                im_pred['Wrong'] = im_pred['Wrong']+ [{'Image':data[id],'pred':pred[id],'actual' : target[id]}]
+                  im_pred['Correct'] = im_pred['Correct'] + [{'Image': data[id].copy(), 'pred': pred[id], 'actual': target[id], 'UnNorm_Image': revnorm(data[id])}]
+              else:
+                  if (len(im_pred['Wrong']) < 5):
+                      im_pred['Wrong'] = im_pred['Wrong'] + [{'Image': data[id].copy(), 'pred': pred[id], 'actual': target[id], 'UnNorm_Image': revnorm(data[id])}]
 
   return im_pred
 
@@ -170,7 +170,7 @@ def plot_Misclassified(im_pred,data):
     pred_ = data.classes[im_pred['Correct'][i]['pred'].cpu()[0]]
     # Plot
     plt.title('Actual Value is {label}\n Predicted Value is {pred}'.format(label=label_, pred =pred_),  color='b')
-    plt.imshow(im_pred['Correct'][i]['Image'].cpu().permute(1, 2, 0))
+    plt.imshow(im_pred['Correct'][i]['UnNorm_Image'].cpu().permute(1, 2, 0))
 
 
   plt.show()
@@ -183,6 +183,6 @@ def plot_Misclassified(im_pred,data):
     pred_ = data.classes[im_pred['Wrong'][i]['pred'].cpu()[0]]
     # Plot
     plt.title('Actual Value is {label}\n Predicted Value is {pred}'.format(label=label_, pred =pred_), color='r')
-    plt.imshow(im_pred['Wrong'][i]['Image'].cpu().permute(1, 2, 0))
+    plt.imshow(im_pred['Wrong'][i]['UnNorm_Image'].cpu().permute(1, 2, 0))
 
   plt.show()
