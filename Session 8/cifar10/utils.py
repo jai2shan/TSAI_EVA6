@@ -5,6 +5,7 @@ import torch.optim as optim
 import torch.nn as nn
 from tqdm import tqdm
 import torch.nn.functional as F
+import matplotlib.pyplot as plt
 
 def cuda_device():
     use_cuda = torch.cuda.is_available()
