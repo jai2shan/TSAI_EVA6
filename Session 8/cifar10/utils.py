@@ -22,7 +22,7 @@ class TrainTest:
         self.train_acc = []
         self.test_acc = []
         self.device = cuda_device()
-        self.model = model
+        self.model = model.to(self.device)
         self.train_loader = train_loader
         self.test_loader = test_loader
         self.criterion = nn.CrossEntropyLoss()
