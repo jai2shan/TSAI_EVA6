@@ -93,7 +93,7 @@ class cifar_dataloader:
         transform_params['train'] = transforms.Compose([transforms.RandomHorizontalFlip(),
                                               #  transforms.Grayscale(num_output_channels=3),
                                                transforms.RandomCrop(32, padding=4),
-                                               transforms.RandomRotation(10),
+                                               transforms.RandomRotation(5),
                                                transforms.RandomAffine(0, shear=10, scale=(0.8, 1.2)),
                                                transforms.ColorJitter(brightness=0.2, contrast=0.2,
                                                                        saturation=0.2),

@@ -29,7 +29,7 @@ class TrainTest:
         self.lr = lr
         self.opt = opt
         self.optimizer = optim.SGD(self.model.parameters(), lr=self.lr, momentum=0.9)
-        self.L1 = L1
+
         if self.opt == "ReduceLROnPlateau":
             self.scheduler = ReduceLROnPlateau(self.optimizer, 'min')
 
@@ -110,3 +110,77 @@ class TrainTest:
             self.test_()
 
         print('Finished Training')
+
+
+class UnNormalize(object):
+    def __init__(self):
+        self.mean = data.mean
+        self.std = data.std
+
+    def __call__(self, tensor):
+        """
+        Args:
+            tensor (Tensor): Tensor image of size (C, H, W) to be normalized.
+        Returns:
+            Tensor: Normalized image.
+        """
+        for t, m, s in zip(tensor, self.mean, self.std):
+            t.mul_(s).add_(m)
+            # The normalize code -> t.sub_(m).div_(s)
+        return tensor
+
+def Misclassified_Images(model, test_loader,device = "cuda"):
+  model.eval()
+  revnorm = UnNormalize()
+  test_loss = 0
+  correct = 0
+  im_pred = {'Correct': [] ,
+            'Wrong': []}
+  i = 1
+  plt_dt = dict()
+  with torch.no_grad():
+      for data, target in test_loader:
+        if (len(im_pred['Correct'])<21) |  (len(im_pred['Wrong'])<21):
+          data, target = data.to(device), target.to(device)
+          output = model(data)
+          test_loss += F.nll_loss(output, target, reduction='sum').item()  # sum up batch loss
+          pred = output.argmax(dim=1, keepdim=True)  # get the index of the max log-probability
+          correct += pred.eq(target.view_as(pred)).sum().item()
+          i+=1
+          plt_dt['Input'], plt_dt['target'], plt_dt['pred'] = revnorm(data.to('cpu')), target.to('cpu'), pred.to('cpu').view(-1,)
+
+          for id in range(len(data)):
+            if plt_dt['target'][id] == plt_dt['pred'][id]:
+              if (len(im_pred['Correct'])<5):
+                im_pred['Correct'] = im_pred['Correct']+ [{'Image':data[id],'pred':pred[id],'actual' : target[id]}]
+            else:
+              if (len(im_pred['Wrong'])<5):
+                im_pred['Wrong'] = im_pred['Wrong']+ [{'Image':data[id],'pred':pred[id],'actual' : target[id]}]
+
+  return im_pred
+
+def plot_Misclassified(im_pred):
+  plt.figure(figsize=(16,16))
+
+  for i in range(len(im_pred['Correct'])):
+    plt.subplot(1,5,i+1)
+    label_ = data.classes[im_pred['Correct'][i]['actual'].cpu()]
+    pred_ = data.classes[im_pred['Correct'][i]['pred'].cpu()[0]]
+    # Plot
+    plt.title('Actual Value is {label}\n Predicted Value is {pred}'.format(label=label_, pred =pred_),  color='b')
+    plt.imshow(im_pred['Correct'][i]['Image'].cpu().permute(1, 2, 0))
+
+
+  plt.show()
+
+  plt.figure(figsize=(16,16))
+
+  for i in range(len(im_pred['Wrong'])):
+    plt.subplot(1,5,i+1)
+    label_ = data.classes[im_pred['Wrong'][i]['actual'].cpu()]
+    pred_ = data.classes[im_pred['Wrong'][i]['pred'].cpu()[0]]
+    # Plot
+    plt.title('Actual Value is {label}\n Predicted Value is {pred}'.format(label=label_, pred =pred_), color='r')
+    plt.imshow(im_pred['Wrong'][i]['Image'].cpu().permute(1, 2, 0))
+
+  plt.show()
