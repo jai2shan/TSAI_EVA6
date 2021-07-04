@@ -161,7 +161,7 @@ def Misclassified_Images(model, data, test_loader,device = "cuda"):
 
   return im_pred
 
-def plot_Misclassified(im_pred):
+def plot_Misclassified(im_pred,data):
   plt.figure(figsize=(16,16))
 
   for i in range(len(im_pred['Correct'])):
