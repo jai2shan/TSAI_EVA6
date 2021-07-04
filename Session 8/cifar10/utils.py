@@ -129,9 +129,9 @@ class UnNormalize(object):
             # The normalize code -> t.sub_(m).div_(s)
         return tensor
 
-def Misclassified_Images(model, test_loader,device = "cuda"):
+def Misclassified_Images(model, data, test_loader,device = "cuda"):
   model.eval()
-  revnorm = UnNormalize()
+  revnorm = UnNormalize(data)
   test_loss = 0
   correct = 0
   im_pred = {'Correct': [] ,
