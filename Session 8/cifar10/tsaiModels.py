@@ -1,3 +1,7 @@
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
 class ResBlock(nn.Module):
     """
     Residual Block as in Assignment 8
