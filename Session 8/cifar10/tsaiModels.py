@@ -7,7 +7,7 @@ class ResBlock(nn.Module):
     Residual Block as in Assignment 8
     """
     def __init__(self, inchannels, outchannels, stride_):
-        self.res = nn.sequential(nn.Conv2d(in_channels=inchannels, out_channels=outchannels, 
+        self.res = nn.Sequential(nn.Conv2d(in_channels=inchannels, out_channels=outchannels, 
                                          kernel_size=(3, 3),stride=stride_, padding=1, 
                                          bias=False),
                              nn.BatchNorm2d(128),
@@ -37,7 +37,7 @@ class Net(nn.Module):
                         )
         
         ## Layer 1
-        self.l1x = nn.sequential(nn.Conv2d(in_channels=64, out_channels=128, 
+        self.l1x = nn.Sequential(nn.Conv2d(in_channels=64, out_channels=128, 
                                              kernel_size=(3, 3),stride=1, padding=1, 
                                              bias=False),
                                  nn.MaxPool2d(2, 2),
@@ -48,7 +48,7 @@ class Net(nn.Module):
 
         
         ## Layer 2
-        self.l2 = nn.sequential(nn.Conv2d(in_channels=128, out_channels=256, 
+        self.l2 = nn.Sequential(nn.Conv2d(in_channels=128, out_channels=256, 
                                              kernel_size=(3, 3),stride=1, padding=1, 
                                              bias=False),
                                  nn.MaxPool2d(2, 2),
@@ -57,7 +57,7 @@ class Net(nn.Module):
                         )
         
         ## Layer 3
-        self.l3x = nn.sequential(nn.Conv2d(in_channels=256, out_channels=512, 
+        self.l3x = nn.Sequential(nn.Conv2d(in_channels=256, out_channels=512, 
                                              kernel_size=(3, 3),stride=1, padding=1, 
                                              bias=False),
                                  nn.MaxPool2d(2, 2),
