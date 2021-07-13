@@ -65,9 +65,9 @@ class cifar_dataloader:
                                        transform=transforms.Compose([transforms.ToTensor()]))
 
         trainloader = torch.utils.data.DataLoader(trainset, batch_size=self.BatchSize,
-                                          shuffle=True, num_workers=2)
+                                          shuffle=True, num_workers=0)
         testloader = torch.utils.data.DataLoader(testset, batch_size=self.BatchSize,
-                                         shuffle=False, num_workers=2)
+                                         shuffle=False, num_workers=0)
 
         print("Calculating mean and std of data")
         for images, _ in trainloader:
@@ -110,10 +110,10 @@ class cifar_dataloader:
         testset = torchvision.datasets.CIFAR10(root='./data', train=False,
                                        download=True, transform = transform_params['test'])
         trainloader = torch.utils.data.DataLoader(trainset, batch_size=self.BatchSize,
-                                                    shuffle=True, num_workers=2)
+                                                    shuffle=True, num_workers=0)
 
         testloader = torch.utils.data.DataLoader(testset, batch_size=self.BatchSize,
-                                                    shuffle=False, num_workers=2)
+                                                    shuffle=False, num_workers=0)
 
         self.View_images(trainloader)
         return trainloader, testloader

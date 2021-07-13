@@ -6,27 +6,27 @@ class ResBlock(nn.Module):
     """
     Residual Block as in Assignment 8
     """
-    def __init__(self, inchannels, outchannels, stride_):
+    def __init__(self, inchannels, outchannels, stride_=1):
+        super().__init__()
         self.res = nn.Sequential(nn.Conv2d(in_channels=inchannels, out_channels=outchannels, 
                                          kernel_size=(3, 3),stride=stride_, padding=1, 
                                          bias=False),
-                             nn.BatchNorm2d(128),
+                             nn.BatchNorm2d(outchannels),
                              nn.ReLU(),
                              nn.Conv2d(in_channels=inchannels, out_channels=outchannels, 
                                          kernel_size=(3, 3),stride=stride_, padding=1, 
                                          bias=False),
-                             nn.BatchNorm2d(128),
+                             nn.BatchNorm2d(outchannels),
                              nn.ReLU()
                     )
     
-    def forward(self,x):
+    def forward(self,out):
         out = self.res(out)
         return out
 
-class Net(nn.Module):
+class tsaiNet(nn.Module):
     def __init__(self, ResBlock, num_classes=10):
-        super(Net, self).__init__()
-        
+        super().__init__()
         ## Preparation Block
         self.prep = nn.Sequential(
                         nn.Conv2d(in_channels=3, out_channels=64, 
@@ -83,10 +83,17 @@ class Net(nn.Module):
         x = self.l3x(x)
         res2 = self.resblock2(x)
         x = x+res2
-        
-        x = self.max_4(x)
+
+        x = self.max_4(x)  
+        x = x.view(x.size(0), -1)
         x = self.fc(x)
         return x
+
+
         
         
-    
+def tsaiResNet():
+    """
+    Custom ResNet model.
+    """
+    return tsaiNet(ResBlock)    
