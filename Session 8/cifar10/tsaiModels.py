@@ -24,7 +24,7 @@ class ResBlock(nn.Module):
         return out
 
 class Net(nn.Module):
-    def __init__(self, block, num_classes=10):
+    def __init__(self, ResBlock, num_classes=10):
         super(Net, self).__init__()
         
         ## Preparation Block
